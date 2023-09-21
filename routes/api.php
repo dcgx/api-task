@@ -27,7 +27,6 @@ Route::post('register', [RegisteredUserController::class, 'store']);;
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    // Route::post('forgot-password', [PasswordResetLinkController::class, 'store']);;
-
     Route::apiResource('tasks', TaskController::class);
+    Route::apiResource('users', UserController::class);
 });
