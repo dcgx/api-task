@@ -23,6 +23,24 @@
                         }
                     },
                     {
+                        "name": "description",
+                        "in": "query",
+                        "description": "The description of task",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "The status of task",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
                         "name": "page",
                         "in": "query",
                         "description": "The page number",
@@ -38,6 +56,15 @@
                         "required": false,
                         "schema": {
                             "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort order for tasks (e.g., title,asc)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],

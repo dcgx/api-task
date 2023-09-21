@@ -20,7 +20,6 @@ class ListTasks
     public function handle(
         array $fields = ['*'],
         array $filters = [],
-        array $sort = ['id', 'asc'],
         int $results = 10,
         bool $paginated = false,
         bool $withTrashed = false
@@ -35,14 +34,14 @@ class ListTasks
         return $results;
     }
 
-    private function setQuery(): self
+    protected function setQuery(): self
     {
         $this->query = Task::query();
 
         return $this;
     }
 
-    private function prepareQuery(array $fields, bool $withTrashed): self
+    protected function prepareQuery(array $fields, bool $withTrashed): self
     {
         $this->query->select($fields)
             ->when($withTrashed, fn (Builder $builder) => $builder->withTrashed());
@@ -50,12 +49,26 @@ class ListTasks
         return $this;
     }
 
-    private function applyFilter(array $filters)
+    protected function applyFilter(array $filters)
     {   
         $this->query
             ->when(Arr::get($filters, 'title'), function(Builder $builder) use ($filters) {
                 $builder->where('title', 'like', "%{$filters['title']}%");
+            })
+            ->when(Arr::get($filters, 'description'), function(Builder $builder) use ($filters) {
+                $builder->where('description', 'like', "%{$filters['description']}%");
+            })
+            ->when(Arr::get($filters, 'status'), function(Builder $builder) use ($filters) {
+                $status = $filters['status'] === 'true' ? 1 : 0;
+                $builder->where('status', $status);
             });
+
+        return $this;
+    }
+
+    protected function applySort(array $sort): self
+    {
+        $this->query->orderBy($sort[0], $sort[1]);
 
         return $this;
     }

@@ -24,6 +24,24 @@ class TaskController extends Controller
      *         )
      *     ),
      *     @OA\Parameter(
+     *         name="description",
+     *         in="query",
+     *         description="The description of task",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="status",
+     *         in="query",
+     *         description="The status of task",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="boolean",
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="page",
      *         in="query",
      *         description="The page number",
