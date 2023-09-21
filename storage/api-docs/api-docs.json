@@ -5,14 +5,23 @@
         "version": "1.0"
     },
     "paths": {
-        "/tasks": {
+        "/api/tasks": {
             "get": {
                 "tags": [
                     "Tasks"
                 ],
                 "summary": "Display a list of tasks",
-                "operationId": "examplesAll",
+                "operationId": "listAllTasks",
                 "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "The title of task",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "page",
                         "in": "query",
@@ -20,6 +29,15 @@
                         "required": false,
                         "schema": {
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "paginated",
+                        "in": "query",
+                        "description": "Enable pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
                         }
                     }
                 ],
