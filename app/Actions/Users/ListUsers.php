@@ -22,12 +22,11 @@ class ListUsers
         bool $withTrashed = false
     ): LengthAwarePaginator|Collection
     {
-        $user = auth()->user();
         $query = $this->setQuery()
             ->prepareQuery($withTrashed);
 
         $results = $paginated ? $this->getPaginated($results) : $this->getCollection();
-
+        
         return $results;
     }
 

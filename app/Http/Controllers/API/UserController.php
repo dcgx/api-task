@@ -9,15 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-/**
- * @OA\SecurityScheme(
- *     securityScheme="sanctum",
- *     type="http",
- *     in="header",
- *     scheme="bearer",
- *     bearerFormat="JWT",
- * )
- */
 class UserController extends Controller
 {
     /**
@@ -26,7 +17,6 @@ class UserController extends Controller
      *     operationId="listAllUsers",
      *     tags={"Users"},
      *     summary="Display a list of users",
-     *     security={{"sanctum":{}}},
      *     @OA\Response(
      *         response="200",
      *         description="OK",
@@ -58,7 +48,6 @@ class UserController extends Controller
      *     operationId="createUser",
      *     tags={"Users"},
      *     summary="Create a new user",
-     *     security={{"sanctum":{}}},
      *     @OA\RequestBody(
      *         description="User object that needs to be added to the store",
      *         required=true,
@@ -94,9 +83,8 @@ class UserController extends Controller
      * @OA\Put(
      *     path="/api/users/{id}",
      *     operationId="updateUser",
-     *     tags={"Uasks"},
+     *     tags={"Users"},
      *     summary="Update a user",
-     *     security={{"sanctum":{}}},
      *     @OA\RequestBody(
      *         description="User object that needs to be updated",
      *         required=true,
@@ -158,9 +146,8 @@ class UserController extends Controller
      * @OA\Get(
      *     path="/api/users/{id}",
      *     operationId="showUser",
-     *     tags={"Uasks"},
+     *     tags={"Users"},
      *     summary="Display a user",
-     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -210,9 +197,8 @@ class UserController extends Controller
      * @OA\Delete(
      *     path="/api/users/{id}",
      *     operationId="deleteUser",
-     *     tags={"Uasks"},
+     *     tags={"Users"},
      *     summary="Delete a user",
-     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

@@ -4,6 +4,16 @@ namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *     schema="UpdateUserRequest",
+ *     description="Task object that needs update",
+ *     required={"name", "email", "password"},
+ *     @OA\Property(property="name", type="string", example="Test"),
+ *     @OA\Property(property="email", type="string", example="test@test.com"),
+ *     @OA\Property(property="password", type="boolean", example="password"),
+ * )
+ */
 class UpdateUserRequest extends FormRequest
 {
     /**
