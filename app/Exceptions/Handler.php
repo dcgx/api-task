@@ -31,10 +31,11 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof \Exception) {
+            $statusCode = $exception->getStatusCode() ?: 500;
             return response()->json([
                 'message' => $exception->getMessage(),
-                'code' => $exception->getCode(),
-            ], 400);
+                'code' => $statusCode,
+            ], $statusCode ?: 500);
         }
 
         return parent::render($request, $exception);

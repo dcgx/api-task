@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Actions\Tasks;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
@@ -25,8 +26,9 @@ class ListTasks
         bool $withTrashed = false
     ): LengthAwarePaginator|Collection
     {
+        $user = auth()->user();
         $query = $this->setQuery()
-            ->prepareQuery($fields, $withTrashed)
+            ->prepareQuery($fields, $withTrashed, $user)
             ->applyFilter($filters);
 
         $results = $paginated ? $this->getPaginated($results) : $this->getCollection();
@@ -41,10 +43,12 @@ class ListTasks
         return $this;
     }
 
-    protected function prepareQuery(array $fields, bool $withTrashed): self
+    protected function prepareQuery(array $fields, bool $withTrashed, User $user): self
     {
         $this->query->select($fields)
             ->when($withTrashed, fn (Builder $builder) => $builder->withTrashed());
+
+        $this->query->where('user_id', $user->id);
 
         return $this;
     }
@@ -59,7 +63,7 @@ class ListTasks
                 $builder->where('description', 'like', "%{$filters['description']}%");
             })
             ->when(Arr::get($filters, 'status'), function(Builder $builder) use ($filters) {
-                $status = $filters['status'] === 'true' ? 1 : 0;
+                $status = $filters['status'] === 'true' || $filters['status'] === '1' || $filters['status'] === 1 ? 1 : 0;  
                 $builder->where('status', $status);
             });
 
