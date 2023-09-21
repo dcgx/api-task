@@ -20,7 +20,8 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreignId('user_id')->constrained();
+            $table->integer('user_id');
+
         });
     }
 

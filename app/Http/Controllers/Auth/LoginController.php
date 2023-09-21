@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
  *         description="Credenciales de inicio de sesión",
  *         @OA\JsonContent(
  *             required={"email", "password"},
- *             @OA\Property(property="email", type="string", format="email", example="test@example.com"),
+ *             @OA\Property(property="email", type="string", format="email", example="test@kiibo-task.test"),
  *             @OA\Property(property="password", type="string", format="password", example="password"),
  *         )
  *     ),

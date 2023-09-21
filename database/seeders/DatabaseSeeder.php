@@ -14,8 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'test@kiibo-task.test',
         ]);
-        \App\Models\Task::factory(10)->create();
     }
 }
